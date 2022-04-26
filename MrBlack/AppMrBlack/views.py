@@ -1,17 +1,22 @@
 from threading import local
+from urllib import request
 from django.http import HttpResponse
 from django.shortcuts import render
-from .models import Hamburguesas, Locales
+from .models import Avatar, Hamburguesas, Locales
 from .forms import HamburguesaFormulario   
+
+from django.views.generic import ListView
+from django.views.generic.detail import DetailView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 # Create your views here.
 def inicio(request):
-    
-    return render(request, 'inicio.html')
+    avatar= Avatar.objects.get(user=request.user.id)
+    return render(request, 'inicio.html',{'avatar':avatar})
 
 def hamburguesas(request):
-    
-    return render(request, 'hamburguesas.html')
+    avatar= Avatar.objects.get(user=request.user.id)
+    return render(request, 'hamburguesas.html',{'avatar':avatar})
 
 def panchos(request):
     
@@ -54,3 +59,90 @@ def buscar(request):
     else:
         return HttpResponse("No enviaste Datos")
 
+def leerHamburguesas(request):
+    hamburguesa= Hamburguesas.objects.all()
+    contexto={"lista_hamburguesa":hamburguesa}
+    return render(request,'leerhamburguesas.html',contexto)
+
+
+def eliminar_hamburguesa(request,id):
+    hamburguesa=Hamburguesas.objects.get(id=id)
+    hamburguesa.delete()
+
+    hamburguesa= Hamburguesas.objects.all()
+    contexto={"lista_hamburguesa":hamburguesa}
+    return render(request,'leerhamburguesas.html',contexto)
+
+def editar_hamburguesa(request,id):
+    hamburguesa=Hamburguesas.objects.get(id=id)
+
+    if request.method == "POST":
+        miFormulario=HamburguesaFormulario(request.POST)
+
+        if miFormulario.is_valid():
+            imformacion=miFormulario.cleaned_data
+
+            hamburguesa.nombrehamburguesa=imformacion['nombrehamburguesa']
+            hamburguesa.tipopan=imformacion['tipopan']
+            hamburguesa.tipocarne=imformacion['tipocarne']
+            hamburguesa.cantidadmedallones=imformacion['cantidadmedallones']
+            hamburguesa.aderezo=imformacion['aderezo']
+            hamburguesa.salsaMrBlack=imformacion['salsaMrBlack']
+            hamburguesa.fechacreacion=imformacion['fechacreacion']
+
+            hamburguesa.save()
+
+            return render(request,'inicio.html')
+
+    else:
+        miFormulario=HamburguesaFormulario(
+            initial={
+                'nombrehamburguesa':hamburguesa.nombrehamburguesa,
+                'tipopan':hamburguesa.tipopan,
+                'tipocarne':hamburguesa.tipocarne,
+                'cantidadmedallones':hamburguesa.cantidadmedallones,
+                'aderezo':hamburguesa.aderezo,
+                'salsaMrBlack':hamburguesa.salsaMrBlack,
+                'fechacreacion':hamburguesa.fechacreacion})
+
+    return render(request,'editarHamburguesa.html',{"miFormulario":miFormulario,"hamburguesa_nombre":hamburguesa.nombrehamburguesa})
+
+
+class HamburguesaList(ListView):
+
+      
+      model = Hamburguesas
+      template_name = "hamburguesas_list.html"
+   
+
+
+
+class HamburguesaDetalle(DetailView):
+
+      model = Hamburguesas
+      template_name = "hamburguesas_detalle.html"
+
+
+
+class HamburguesaCreacion(CreateView):
+
+      model = Hamburguesas
+      template_name="hamburguesas_form.html"
+      success_url = "/hamburguesas/list"
+      fields = ['nombrehamburguesa','tipopan','tipocarne','cantidadmedallones','aderezo','salsaMrBlack','fechacreacion']
+
+
+class HamburguesaUpdate(UpdateView):
+
+      model = Hamburguesas
+      template_name="hamburguesas_form.html"
+      success_url = "/AppMrBlack/hamburguesas/list"
+      fields  = ['nombrehamburguesa','tipopan','tipocarne','cantidadmedallones','aderezo','salsaMrBlack','fechacreacion']
+
+
+class HamburguesaoDelete(DeleteView):
+
+      model = Hamburguesas
+      template_name="hamburguesas_confirm_delete.html"
+      success_url = "/AppMrBlack/hamburguesas/list"
+     

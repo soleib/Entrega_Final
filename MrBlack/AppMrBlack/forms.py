@@ -7,5 +7,5 @@ class HamburguesaFormulario(forms.Form):
     tipocarne = forms.CharField()
     cantidadmedallones = forms.IntegerField()
     aderezo = forms.CharField()
-    salsaMrBlack = forms.BooleanField()
+    salsaMrBlack = forms.CharField()
     fechacreacion = forms.DateField()

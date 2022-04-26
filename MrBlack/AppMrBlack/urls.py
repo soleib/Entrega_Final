@@ -9,5 +9,14 @@ urlpatterns = [
     path('HamburguesaFormulario/', views.hamburguesaFormulario, name="HamburguesaFormulario"),
     path('busquedaLocal/', views.busquedalocal, name="BusquedaLocal"),
     path('buscar/', views.buscar),
-  
-]
+    #CRUD
+    path('leerhamburguesas/',views.leerHamburguesas,name="leerhamburguesas"),
+    path('eliminarHamburguesa/<id>',views.eliminar_hamburguesa,name="EliminarHamburguesa"),
+    path('editarHamburguesa<id>',views.editar_hamburguesa,name="EditarHamburguesa"),
+    #VISTAS BASADAS EN CLASES
+    path('hamburguesas/list',views.HamburguesaList.as_view(),name='List'),
+    path('hamburguesas/detail<pk>',views.HamburguesaDetalle.as_view(),name='Detail'),
+    path('hamburguesas/edit<pk>',views.HamburguesaUpdate.as_view(),name='Edit'),
+    path('hamburguesas/delete<pk>',views.HamburguesaoDelete.as_view(),name='Delete'),
+    path('hamburguesas/create',views.HamburguesaCreacion.as_view(),name='New')]
+

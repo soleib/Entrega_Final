@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hamburguesas_list</title>
+</head>
+<body>
+    <h1>Hamburguesas</h1>
+    <ul style="color: brown">
+        {% for hamburguesas in object_list %}
+
+            <li>
+                <p>NOMBRE: {{ hamburguesas.nombrehamburguesa }} </p>
+                    <img src="hamburguesa.jpeg" width="300"  height="300">
+               
+                <!-- <img src="imagenes/burger4x4.png" width="200" height="300" /> -->
+                <p> 
+                    <a href="{% url 'Detail' hamburguesas.id %}">Ver</a> | 
+                    <a href="{% url 'Edit' hamburguesas.id %}">Editar</a> | 
+                    <a href="{% url 'Delete' hamburguesas.id %}">Borrar</a> 
+                
+                </p> 
+            </li>
+
+        {% endfor %}
+    </ul>
+        
+    
+
+    <a href="{% url 'New'  %}">Nuevo</a>
+    <p>
+        <a href="{% url 'Hamburguesas' %}">Regresar</a>
+    </p>
+    
+
+
+</body>
+</html>

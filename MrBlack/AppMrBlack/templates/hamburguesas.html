@@ -2,7 +2,29 @@
 {% load static %}
 {% block contenidoquecambia %}
 
-<h1>Listado de Hamburguesas</h1>
-<p>Se ha heradado todo desde la plantilla padre</p>
-            
+<!-- 
+    <h1>Hamburguesas</h1>
+    {% for hamburguesas in object_list %}
+
+            <li>
+                <p>NOMBRE: {{ hamburguesas.nombrehamburguesa }} </p>
+                <p> 
+                    <a href="{% url 'Detail' hamburguesas.id %}">Ver</a> | 
+                    <a href="{% url 'Edit' hamburguesas.id %}">Editar</a> | 
+                    <a href="{% url 'Delete' hamburguesas.id %}">Borrar</a> 
+                
+                </p> 
+            </li>
+
+    {% endfor %}
+    <a href="{% url 'New'  %}">Crear Hamburguesa</a> |  -->
+    <h1>Hamburguesas</h1>
+    <img src="{{avatar.imagen.url}}" alt="avatar",width="200" , height="300">
+        <a style="color: red;" href="{% url 'List'  %}"> Ver Hamburguesas</a>
+
+
+
 {% endblock contenidoquecambia %}
+
+
+<!-- iasjkajsoa -->

@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Locales(models.Model):
@@ -18,7 +19,7 @@ class Hamburguesas(models.Model):
     tipocarne = models.CharField('tipocarne',max_length=45)
     cantidadmedallones = models.IntegerField()
     aderezo = models.CharField('aderezo',max_length=45)
-    salsaMrBlack = models.BooleanField()
+    salsaMrBlack = models.CharField('salsaMrBlack',max_length=45)
     fechacreacion = models.DateField('fechacreacion')
 
     def __str__(self):
@@ -33,4 +34,13 @@ class Panchos(models.Model):
 
     def __str__(self):
         return f'{self.nombrepancho}'
+
+class Avatar(models.Model):
+    #vinvulo con el usuario
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    #Subcaperta avatares de media :) 
+    imagen = models.ImageField(upload_to='avatares', null=True, blank = True)
+
+    def __str__(self):
+        return f"Imagen de: {self.user.username}"
     

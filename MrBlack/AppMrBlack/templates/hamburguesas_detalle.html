@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalles de la hamburguesa</title>
+</head>
+<body>
+
+
+   
+    <p>Nombre de la Hamburguesa: <i>{{ hamburguesas.nombrehamburguesa}}</i></p>
+    <p>Tipo de Pan: <i>{{ hamburguesas.tipopan }}</i></p>
+    <p>Tipo de Carne: <i>{{ hamburguesas.tipocarne }}</i></p>
+    <p>Cantidad de medallones: <i>{{ hamburguesas.cantidadmedallones }}</i></p>
+    <p>Salsa MrBlack: <i>{{ hamburguesas.salsaMrBlack }}</i></p>
+    <p>Fecha de Creacion: <i>{{ hamburguesas.fechacreacion }}</i></p>
+
+        <a href="{% url 'List' %}">Regresar</a>
+    </p>
+
+    
+</body>
+</html>
