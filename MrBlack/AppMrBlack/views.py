@@ -2,7 +2,9 @@ from threading import local
 from django.http import HttpResponse
 from django.shortcuts import render
 from .models import Hamburguesas, Locales
-from .forms import HamburguesaFormulario   
+from .forms import HamburguesaFormulario, UserRegisterForm
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import login, logout, authenticate
 
 # Create your views here.
 def inicio(request):
@@ -54,3 +56,37 @@ def buscar(request):
     else:
         return HttpResponse("No enviaste Datos")
 
+def login_request(request):
+    if request.method =="POST":
+        form = AuthenticationForm(request, data= request.POST)
+
+        if form.is_valid():
+            usuario = form.cleaned_data.get('username')
+            psw = form.cleaned_data.get('password')
+
+            user = authenticate(username=usuario, password=psw)
+
+            if user is not None:
+                login(request,user)
+                
+                return render(request, 'inicio.html', {"mensaje":f"Bienvenidx {usuario}"} )
+            else:
+                return render(request, 'inicio.html', {"mensaje":"Error, los datos ingresados son incorrectos"} )
+        else:
+                return render(request, 'inicio.html', {"mensaje":"Error, formulario incorrecto"} )
+    form = AuthenticationForm()
+
+    return render(request, 'login.html',{'form':form})
+
+def register(request):
+    if request.method =="POST":
+
+        form = UserRegisterForm(request.POST)
+        if form.is_valid():
+            username= form.cleaned_data['username']
+            form.save()
+            return render(request, 'inicio.html',{'mensaje':'Usuario creado con éxito'})
+        
+    else: 
+        form = UserRegisterForm()
+    return render(request, 'registro.html', {'form':form})
