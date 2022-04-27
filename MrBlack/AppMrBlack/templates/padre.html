@@ -24,8 +24,19 @@
                 <a class="navbar-brand" href="{% url 'Inicio' %}">Inicio</a>
                 <a class="navbar-brand" href="{% url 'Locales' %}">Locales</a>
                 <a class="navbar-brand" href="{% url 'Hamburguesas' %}">Hamburguesas</a>
+<<<<<<< HEAD
                 <a class="navbar-brand" href="{% url 'Panchos' %}">Comentarios</a>
                 <a class="btn btn-primary" href="#signup">Iniciar Sesión</a>
+=======
+                <a class="navbar-brand" href="{% url 'Panchos' %}">Panchos</a>
+                {% if request.user.is_authenticated %}
+                    <a class="btn btn-primary" href="{% url 'Logout' %}">CERRAR SESIÓN</a>
+                    <h8>{{user.username}}</h8>
+                {% endif %}
+                {% if not request.user.is_authenticated %}
+                    <a class="btn btn-primary" href="{% url 'Login' %}">INICIAR SESIÓN</a>  
+                {% endif %}    
+>>>>>>> 8899c130c9ae94fa21e1a29a8e9d302e1ba76e9d
             </div>
         </nav>
         <!-- Masthead-->
