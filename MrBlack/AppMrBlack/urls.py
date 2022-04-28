@@ -10,7 +10,7 @@ urlpatterns = [
     path('HamburguesaFormulario/', views.hamburguesaFormulario, name="HamburguesaFormulario"),
     path('busquedaLocal/', views.busquedalocal, name="BusquedaLocal"),
     path('buscar/', views.buscar),
-<<<<<<< HEAD
+
     #CRUD
     path('leerhamburguesas/',views.leerHamburguesas,name="leerhamburguesas"),
     path('eliminarHamburguesa/<id>',views.eliminar_hamburguesa,name="EliminarHamburguesa"),
@@ -20,12 +20,8 @@ urlpatterns = [
     path('hamburguesas/detail<pk>',views.HamburguesaDetalle.as_view(),name='Detail'),
     path('hamburguesas/edit<pk>',views.HamburguesaUpdate.as_view(),name='Edit'),
     path('hamburguesas/delete<pk>',views.HamburguesaoDelete.as_view(),name='Delete'),
-    path('hamburguesas/create',views.HamburguesaCreacion.as_view(),name='New')]
-
-=======
+    path('hamburguesas/create',views.HamburguesaCreacion.as_view(),name='New'),
     path('login/', views.login_request, name="Login"),
     path('register/', views.register, name="Register"),
-    path('logout/', LogoutView.as_view(template_name="logout.html"), name="Logout"),
-  
-]
->>>>>>> 8899c130c9ae94fa21e1a29a8e9d302e1ba76e9d
+    path('logout/', LogoutView.as_view(template_name="logout.html"), name="Logout")]
+

@@ -11,11 +11,8 @@ class HamburguesaFormulario(forms.Form):
     tipocarne = forms.CharField()
     cantidadmedallones = forms.IntegerField()
     aderezo = forms.CharField()
-<<<<<<< HEAD
+
     salsaMrBlack = forms.CharField()
-    fechacreacion = forms.DateField()
-=======
-    salsaMrBlack = forms.BooleanField()
     fechacreacion = forms.DateField()
 
 
@@ -29,4 +26,3 @@ class UserRegisterForm(UserCreationForm):
         fields = ['username','email', 'password1','password2']
 
         help_texts ={k:"" for k in fields} 
->>>>>>> 8899c130c9ae94fa21e1a29a8e9d302e1ba76e9d

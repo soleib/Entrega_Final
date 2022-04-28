@@ -2,15 +2,15 @@ from threading import local
 from urllib import request
 from django.http import HttpResponse
 from django.shortcuts import render
-<<<<<<< HEAD
+
 from .models import Avatar, Hamburguesas, Locales
 from .forms import HamburguesaFormulario   
-=======
+
 from .models import Hamburguesas, Locales
 from .forms import HamburguesaFormulario, UserRegisterForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
->>>>>>> 8899c130c9ae94fa21e1a29a8e9d302e1ba76e9d
+
 
 from django.views.generic import ListView
 from django.views.generic.detail import DetailView
@@ -66,7 +66,7 @@ def buscar(request):
     else:
         return HttpResponse("No enviaste Datos")
 
-<<<<<<< HEAD
+
 def leerHamburguesas(request):
     hamburguesa= Hamburguesas.objects.all()
     contexto={"lista_hamburguesa":hamburguesa}
@@ -153,8 +153,7 @@ class HamburguesaoDelete(DeleteView):
       model = Hamburguesas
       template_name="hamburguesas_confirm_delete.html"
       success_url = "/AppMrBlack/hamburguesas/list"
-     
-=======
+
 def login_request(request):
     if request.method =="POST":
         form = AuthenticationForm(request, data= request.POST)
@@ -189,4 +188,4 @@ def register(request):
     else: 
         form = UserRegisterForm()
     return render(request, 'registro.html', {'form':form})
->>>>>>> 8899c130c9ae94fa21e1a29a8e9d302e1ba76e9d
+
