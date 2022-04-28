@@ -18,12 +18,12 @@ from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 # Create your views here.
 def inicio(request):
-    avatar= Avatar.objects.get(user=request.user.id)
-    return render(request, 'inicio.html',{'avatar':avatar})
+    #avatar= Avatar.objects.get(user=request.user.id)
+    return render(request, 'inicio.html')
 
 def hamburguesas(request):
-    avatar= Avatar.objects.get(user=request.user.id)
-    return render(request, 'hamburguesas.html',{'avatar':avatar})
+   # avatar= Avatar.objects.get(user=request.user.id)
+    return render(request, 'hamburguesas.html')
 
 def panchos(request):
     
