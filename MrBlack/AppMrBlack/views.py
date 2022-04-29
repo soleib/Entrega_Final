@@ -136,7 +136,7 @@ class HamburguesaCreacion(CreateView):
 
       model = Hamburguesas
       template_name="hamburguesas_form.html"
-      success_url = "/hamburguesas/list"
+      success_url = "/AppMrBlack/hamburguesas/list"
       fields = ['nombrehamburguesa','tipopan','tipocarne','cantidadmedallones','aderezo','salsaMrBlack','fechacreacion']
 
 
@@ -188,4 +188,16 @@ def register(request):
     else: 
         form = UserRegisterForm()
     return render(request, 'registro.html', {'form':form})
+
+def busquedaHamburguesa(request):
+    return render(request, "busquedaHamburguesa.html")
+
+def buscarHamburguesa(request):
+    if request.GET["nombrehamburguesa"]:
+        nombrehamburguesa = request.GET["nombrehamburguesa"]
+        hamburguesa = Hamburguesas.objects.filter(nombrehamburguesa =nombrehamburguesa)
+
+        return render(request, "buscarHamburguesa.html", {"hamburguesa":hamburguesa,"nombrehamburguesa" : nombrehamburguesa})
+    else:
+        return HttpResponse("No enviaste Datos")    
 

@@ -3,8 +3,14 @@
 {% block contenidoquecambia %}
 
 
-<h1>Este es el titulo de inicio que cambio</h1>
-<p>Se ha heradado todo desde la plantilla padre</p>
+<h1>Una forma mas rapida de encontrar la hamburguesa que quiere es en el buscador</h1>
+<p>Porfavor hacer la busqueda en letras mayusculas</p>
+
+<form action="/AppMrBlack/buscarHamburguesa/" method="GET">{% csrf_token %}
+   
+    <input type="text" name="nombrehamburguesa" id="nombrehamburguesa">
+         
+    <input type="submit" value = "Buscar"> 
 
 <h3>{{mensaje}}</h3>
 

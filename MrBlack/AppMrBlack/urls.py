@@ -2,6 +2,8 @@ from django.urls import path
 from AppMrBlack import views
 from django.contrib.auth.views import LogoutView
 
+
+
 urlpatterns = [
     path('',views.inicio, name="Inicio"),
     path('locales/',views.locales, name="Locales"),
@@ -23,5 +25,8 @@ urlpatterns = [
     path('hamburguesas/create',views.HamburguesaCreacion.as_view(),name='New'),
     path('login/', views.login_request, name="Login"),
     path('register/', views.register, name="Register"),
-    path('logout/', LogoutView.as_view(template_name="logout.html"), name="Logout")]
+    path('logout/', LogoutView.as_view(template_name="logout.html"), name="Logout"),
 
+    #inicio
+    path('busquedaHamburguesa/', views.busquedaHamburguesa, name="BusquedaHamburguesa"),
+    path('buscarHamburguesa/',views.buscarHamburguesa)]

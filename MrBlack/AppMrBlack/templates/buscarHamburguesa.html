@@ -1,0 +1,42 @@
+{% extends 'padre.html' %}
+{% load static %}
+{% block contenidoquecambia %}
+
+    <h4>Estos son los resultados de la busqueda:</h4>
+
+    {%if x not in  hamburguesa%}
+        <h5>No mencionaste ningun tipo de hamburguesa</h5>
+    {%endif%}    
+
+<ul>
+    
+    {% for x in hamburguesa %}
+
+        <h1>{{x.nombrehamburguesa}}</h1>
+
+        <li>TIPO DE PAN: {{x.tipopan}}</li>
+        <li>TIPO DE CARNE: {{x.tipocarne}}</li>
+        <li>CANTIDAD DE MEDALLONES{{x.cantidadmedallones}}</li>
+        <li>ADEREZO: {{x.aderezo}}</li>
+        <li>SALSA MRBLACK: {{x.salsaMrBlack}}</li>
+        <li>TIPO DE PAN: {{x.tipopan}}</li>
+        <li>FECHA DE CREACION: {{x.fechacreacion}}</li>
+
+        <p>
+            <a href="{% url 'List'  %}"> Ver mas Hamburguesas</a>
+        </p>
+
+        <p> 
+            <a href="{% url 'Edit' x.id %}">Editar</a> | 
+            <a href="{% url 'Delete' x.id %}">Borrar</a>|
+            <a href="{% url 'New'  %}">Nuevo</a>
+        </p> 
+
+        <p>
+            <a href="{% url 'Inicio' %}">Regresar</a>
+        </p>
+    {% endfor %}
+
+</ul>
+    
+{% endblock contenidoquecambia %}
