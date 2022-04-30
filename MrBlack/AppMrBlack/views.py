@@ -1,10 +1,13 @@
+import email
 from threading import local
 from urllib import request
+import webbrowser
+from xml.etree.ElementTree import QName
 from django.http import HttpResponse
 from django.shortcuts import render
 
 from .models import Avatar, Hamburguesas, Locales
-from .forms import HamburguesaFormulario   
+from .forms import HamburguesaFormulario, UserEditForm   
 
 from .models import Hamburguesas, Locales
 from .forms import HamburguesaFormulario, UserRegisterForm
@@ -16,10 +19,15 @@ from django.views.generic import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
+from django.contrib.auth.decorators import login_required
+
 # Create your views here.
 def inicio(request):
-    avatar= Avatar.objects.get(user=request.user.id)
-    return render(request, 'inicio.html',{'avatar':avatar})
+    if request.user.is_authenticated:
+        avatar= Avatar.objects.get(user=request.user.id)
+        return render(request, 'inicio.html',{'avatar':avatar})
+    if not request.user.is_authenticated:
+        return render(request, 'inicio.html')
 
 def hamburguesas(request):
     avatar= Avatar.objects.get(user=request.user.id)
@@ -203,4 +211,33 @@ def buscarHamburguesa(request):
         return render(request, "buscarHamburguesa.html", {"hamburguesa":hamburguesa,"nombrehamburguesa" : nombrehamburguesa})
     else:
         return HttpResponse("No enviaste Datos")    
+
+@login_required
+def editarPerfil(request):
+
+    #Instancia de login
+    usuario = request.user
+    if request.method == 'POST':
+        miFormulario = UserEditForm(request.POST)
+        if miFormulario.is_valid():
+
+            informacion = miFormulario.cleaned_data
+
+            #Datos que se modificarán
+            usuario.nombre = informacion['nombre']
+            usuario.descripcion = informacion['descripcion']
+            usuario.web = informacion['web']
+            usuario.email = informacion['email']
+            usuario.password1 = informacion['password1']
+            usuario.password2 = informacion['password2']
+
+            return render(request,"inicio.html") 
+        #En caso de que no sea post
+    else:
+        #Creo el formulario con los datos que voy a modificar
+        miFormulario = UserEditForm(initial={'email':usuario.email})
+
+    return render(request, "editarPerfil.html",{"miFormulario":miFormulario, "usuario":usuario})
+
+            
 
