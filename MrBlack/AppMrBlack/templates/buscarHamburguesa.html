@@ -1,42 +1,91 @@
-{% extends 'padre.html' %}
-{% load static %}
-{% block contenidoquecambia %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {% load static %}
 
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Mr Black</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
+    </head>
+    <body>
+        <!-- Responsive navbar-->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container">
+                <a class="navbar-brand" href="#!">Sobre Nosotros</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <a class="navbar-brand" href="{% url 'Inicio' %}">Inicio</a>
+                        <a class="navbar-brand" href="{% url 'Locales' %}">Locales</a>
+                        <a class="navbar-brand" href="{% url 'Hamburguesas' %}">Hamburguesas</a>
+                        <a class="navbar-brand" href="{% url 'Panchos' %}">Panchos</a>
+                        <a class="btn btn-primary" href="#signup">Iniciar Sesión</a>
+                    </ul>    
+                    
+                </div>
+            </div>
+        </nav>
     <h4>Estos son los resultados de la busqueda:</h4>
 
-    {%if x not in  hamburguesa%}
-        <h5>No mencionaste ningun tipo de hamburguesa</h5>
-    {%endif%}    
+    <!-- {%if x not in  hamburguesa%}
+        <h5>No mencionaste ningun tipo de hamburguesa</h5>  #arreglar
+    {%endif%} -->
+    <ul>
+        
+        {% for x in hamburguesa %}
 
-<ul>
-    
-    {% for x in hamburguesa %}
+            <h1>{{x.nombrehamburguesa}}</h1>
 
-        <h1>{{x.nombrehamburguesa}}</h1>
+            <li>TIPO DE PAN: {{x.tipopan}}</li>
+            <li>TIPO DE CARNE: {{x.tipocarne}}</li>
+            <li>CANTIDAD DE MEDALLONES{{x.cantidadmedallones}}</li>
+            <li>ADEREZO: {{x.aderezo}}</li>
+            <li>SALSA MRBLACK: {{x.salsaMrBlack}}</li>
+            <li>TIPO DE PAN: {{x.tipopan}}</li>
+            <li>FECHA DE CREACION: {{x.fechacreacion}}</li>
+            <img src="{{x.imagen_referencial.url}}" alt="modelo",width="200" , height="300">
 
-        <li>TIPO DE PAN: {{x.tipopan}}</li>
-        <li>TIPO DE CARNE: {{x.tipocarne}}</li>
-        <li>CANTIDAD DE MEDALLONES{{x.cantidadmedallones}}</li>
-        <li>ADEREZO: {{x.aderezo}}</li>
-        <li>SALSA MRBLACK: {{x.salsaMrBlack}}</li>
-        <li>TIPO DE PAN: {{x.tipopan}}</li>
-        <li>FECHA DE CREACION: {{x.fechacreacion}}</li>
+            <div class="container"></div>
+                <div id="disqus_thread"></div>
+                <script>
+                    /**
+                    *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                    *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+                    /*
+                    var disqus_config = function () {
+                    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+                    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                    };
+                    */
+                    (function() { // DON'T EDIT BELOW THIS LINE
+                    var d = document, s = d.createElement('script');
+                    s.src = 'https://mrblack-1.disqus.com/embed.js';
+                    s.setAttribute('data-timestamp', +new Date());
+                    (d.head || d.body).appendChild(s);
+                    })();
+                </script>
+                <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                </div>
 
-        <p>
-            <a href="{% url 'List'  %}"> Ver mas Hamburguesas</a>
-        </p>
+            <p>
+                <a href="{% url 'List'  %}"> Ver mas Hamburguesas</a>
+            </p>
 
-        <p> 
-            <a href="{% url 'Edit' x.id %}">Editar</a> | 
-            <a href="{% url 'Delete' x.id %}">Borrar</a>|
-            <a href="{% url 'New'  %}">Nuevo</a>
-        </p> 
+            <p> 
+                <a href="{% url 'Edit' x.id %}">Editar</a> | 
+                <a href="{% url 'Delete' x.id %}">Borrar</a>|
+                <a href="{% url 'New'  %}">Nuevo</a>
+            </p> 
 
-        <p>
-            <a href="{% url 'Inicio' %}">Regresar</a>
-        </p>
-    {% endfor %}
-
-</ul>
-    
-{% endblock contenidoquecambia %}
+            <p>
+                <a href="{% url 'Inicio' %}">Regresar</a>
+            </p>
+        {%endfor%}
+        
+    </ul>

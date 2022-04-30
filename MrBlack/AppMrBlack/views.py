@@ -29,6 +29,9 @@ def panchos(request):
     
     return render(request, 'panchos.html')
 
+def comentarios(request):
+    return render(request,'comentarios,html')   
+
 def locales(request):
     
     return render(request, 'locales.html')

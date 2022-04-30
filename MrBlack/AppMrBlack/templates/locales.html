@@ -1,11 +1,40 @@
-{% extends 'padre.html' %}
-{% load static %}
-{% block contenidoquecambia %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        {% load static %}
 
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Mr Black</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
+    </head>
+    <body>
+        <!-- Responsive navbar-->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container">
+                <a class="navbar-brand" href="#!">Sobre Nosotros</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                        <a class="navbar-brand" href="{% url 'Inicio' %}">Inicio</a>
+                        <a class="navbar-brand" href="{% url 'Locales' %}">Locales</a>
+                        <a class="navbar-brand" href="{% url 'Hamburguesas' %}">Hamburguesas</a>
+                        <a class="navbar-brand" href="{% url 'Panchos' %}">Panchos</a>
+                        <a class="btn btn-primary" href="#signup">Iniciar Sesión</a>
+                    </ul>    
+                    
+                </div>
+            </div>
+        </nav>
 <h1>Visita nuestros Locales</h1>
 <ul>
     <li>Local 1</li>
     <li>Local 2</li>
-</ul>>
+</ul>
             
-{% endblock contenidoquecambia %}
+

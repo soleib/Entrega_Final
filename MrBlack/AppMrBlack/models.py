@@ -21,6 +21,7 @@ class Hamburguesas(models.Model):
     aderezo = models.CharField('aderezo',max_length=45)
     salsaMrBlack = models.CharField('salsaMrBlack',max_length=45)
     fechacreacion = models.DateField('fechacreacion')
+    imagen_referencial=models.ImageField('imagen_referencial',upload_to='imagenes/', max_length=255 , null=True)
 
     def __str__(self):
         return f'{self.nombrehamburguesa}'
@@ -43,4 +44,3 @@ class Avatar(models.Model):
 
     def __str__(self):
         return f"Imagen de: {self.user.username}"
-
