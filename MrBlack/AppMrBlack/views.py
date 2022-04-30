@@ -23,8 +23,11 @@ from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def inicio(request):
-    avatar= Avatar.objects.get(user=request.user.id)
-    return render(request, 'inicio.html',{'avatar':avatar})
+    if request.user.is_authenticated:
+        avatar= Avatar.objects.get(user=request.user.id)
+        return render(request, 'inicio.html',{'avatar':avatar})
+    if not request.user.is_authenticated:
+        return render(request, 'inicio.html')
 
 def hamburguesas(request):
     avatar= Avatar.objects.get(user=request.user.id)
