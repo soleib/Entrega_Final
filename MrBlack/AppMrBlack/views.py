@@ -240,4 +240,39 @@ def editarPerfil(request):
     return render(request, "editarPerfil.html",{"miFormulario":miFormulario, "usuario":usuario})
 
             
+class LocalList(ListView):
+      
+    model = Locales
+    template_name = "local_list.html"
+   
+
+
+
+class LocalDetalle(DetailView):
+
+     model = Locales
+     template_name = "local_detalle.html"
+
+
+
+class LocalCreacion(CreateView):
+
+    model = Locales
+    template_name="local_form.html"
+    success_url = "/AppMrBlack/local/list"
+    fields = ['nombrelocal','ciudad','provincia','direccion','altura','fechaapertura']
+
+
+class LocalUpdate(UpdateView):
+    model = Locales
+    template_name="local_form.html"
+    success_url = "/AppMrBlack/local/list"
+    fields  = ['nombrelocal','ciudad','provincia','direccion','altura','fechaapertura']
+
+
+class LocalDelete(DeleteView):
+
+    model = Locales
+    template_name="local_confirm_delete.html"
+    success_url = "/AppMrBlack/local/list"
 
