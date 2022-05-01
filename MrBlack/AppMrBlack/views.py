@@ -3,8 +3,9 @@ from threading import local
 from urllib import request
 import webbrowser
 from xml.etree.ElementTree import QName
+from django import views
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 
 from .models import Avatar, Hamburguesas, Locales
 from .forms import HamburguesaFormulario, UserEditForm   
@@ -13,15 +14,19 @@ from .models import Hamburguesas, Locales
 from .forms import HamburguesaFormulario, UserRegisterForm
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import login, logout, authenticate
+from.forms import ContactoForm
 
 
-from django.views.generic import ListView
+from django.views.generic import ListView,View
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
+def nosotros(request):
+    return render(request,"nosotros.html")
+
 def inicio(request):
     if request.user.is_authenticated:
         avatar= Avatar.objects.get(user=request.user.id)
@@ -33,9 +38,25 @@ def hamburguesas(request):
     avatar= Avatar.objects.get(user=request.user.id)
     return render(request, 'hamburguesas.html',{'avatar':avatar})
 
-def panchos(request):
-    
-    return render(request, 'panchos.html')
+class formulariocontacto(View):
+    def get (self,request,*args,**kwargs):
+        form=ContactoForm()
+        contexto={
+            'form':form
+        }
+        
+        return render(request, 'contacto.html',contexto)
+
+    def post(self,request,*args,**kwargs):
+        form = ContactoForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('Inicio')
+        else:
+            contexto = {
+                'form':form,
+            }
+            return render(request,'contacto.html',contexto)
 
 def comentarios(request):
     return render(request,'comentarios,html')   

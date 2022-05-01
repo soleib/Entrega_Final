@@ -26,15 +26,30 @@ class Hamburguesas(models.Model):
     def __str__(self):
         return f'{self.nombrehamburguesa}'
 
-class Panchos(models.Model):
-    nombrepancho = models.CharField('nombrepancho',max_length=45)
-    tamaño = models.CharField('tipopan',max_length=45)
-    aderezo = models.CharField('aderezo',max_length=45)
-    salsa = models.CharField('salsa',max_length=45)
-    fechacreacion = models.DateField('fechacreacion')
+
+class Contacto(models.Model):
+    nombre=models.CharField('Nombre',max_length=100)
+    apellidos=models.CharField('Apellidos',max_length=150)
+    correo=models.EmailField('Correo Electrónico',max_length=200)
+    asunto=models.CharField('Asunto',max_length=200)
+    mensaje=models.TextField('Mensaje')
+    class Meta:
+        verbose_name = 'Contacto'
+        verbose_name_plural = 'Contactos'
 
     def __str__(self):
-        return f'{self.nombrepancho}'
+        return self.asunto
+
+
+# class Panchos(models.Model):
+#     nombrepancho = models.CharField('nombrepancho',max_length=45)
+#     tamaño = models.CharField('tipopan',max_length=45)
+#     aderezo = models.CharField('aderezo',max_length=45)
+#     salsa = models.CharField('salsa',max_length=45)
+#     fechacreacion = models.DateField('fechacreacion')
+
+#     def __str__(self):
+#         return f'{self.nombrepancho}'
 
 class Avatar(models.Model):
     #vinvulo con el usuario
@@ -44,3 +59,4 @@ class Avatar(models.Model):
 
     def __str__(self):
         return f"Imagen de: {self.user.username}"
+

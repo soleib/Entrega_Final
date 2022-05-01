@@ -8,7 +8,7 @@ urlpatterns = [
     path('',views.inicio, name="Inicio"),
     path('locales/',views.locales, name="Locales"),
     path('hamburguesas/',views.hamburguesas, name="Hamburguesas"),
-    path('panchos/',views.panchos, name="Panchos"),
+    path('contacto/',views.formulariocontacto.as_view(), name="Contacto"),
     path('HamburguesaFormulario/', views.hamburguesaFormulario, name="HamburguesaFormulario"),
     path('busquedaLocal/', views.busquedalocal, name="BusquedaLocal"),
     path('buscar/', views.buscar),
