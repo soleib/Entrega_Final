@@ -2,12 +2,10 @@
 <html lang="en">
     <head>
         {% load static %}
-
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-        <meta name="description" content="" />
-        <meta name="author" content="" />
-        <title>Mr Black</title>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Core theme CSS (includes Bootstrap)-->
@@ -25,65 +23,66 @@
                         <a class="navbar-brand" href="{% url 'Locales' %}">Locales</a>
                         <a class="navbar-brand" href="{% url 'Hamburguesas' %}">Hamburguesas</a>
                         <a class="navbar-brand" href="{% url 'Contacto' %}">Contacto</a>
+                                                
                         {% if request.user.is_authenticated %}
                             <a class="btn btn-primary" href="{% url 'Logout' %}">CERRAR SESIÓN</a>
                             <a class="navbar-brand" href="{% url 'EditarPerfil' %}">{{user.username}}</a>
-                            <img src="{{avatar.imagen.url}}" alt="avatar",width="25" , height="50">
+                            <img src="{% 'avatar.imagen.url'% }" alt="avatar",width="25" , height="50">
                         {% endif %}
                         {% if not request.user.is_authenticated %}
                             <a class="btn btn-primary" href="{% url 'Login' %}">INICIAR SESIÓN</a>  
 
                         {% endif %}    
+ 
                     </ul>    
                     
                 </div>
             </div>
         </nav>
-   
-   
 
-
-        <!-- <header class="py-5 bg-image-full" style="background-image:url(../static/assets/img/hamburguesa.jpeg)">
+        <header>
             <div class="text-center my-5">
-                <img class="img-fluid rounded-circle mb-4" src="../static/assets/img/logo.PNG" alt="..." height="500" width="800"/>
-                <h1 class="text-white fs-3 fw-bolder">Full Width Pics</h1>
-                <p class="text-white-50 mb-0">Landing Page Template</p>
+                <img class="img-fluid rounded-circle mb-4" src="{%static '../static/assets/img/aboutme2.png'%}" alt="..." height="500" width="800"/>
+                <h1 class ="text-black fs-3 fw-bolder" >Somos un equipo de 2 chicas muy talentosas</h1>
+                <!-- <p class="text-white-50 mb-0">Landing Page Template</p> -->
             </div>
-        </header> -->
-      
-    
-    <!-- {% for hamburguesas in object_list %}
-
-            <li>
-                <p>NOMBRE: {{ hamburguesas.nombrehamburguesa }} </p>
-                <p> 
-                    <a href="{% url 'Detail' hamburguesas.id %}">Ver</a> | 
-                    <a href="{% url 'Edit' hamburguesas.id %}">Editar</a> | 
-                    <a href="{% url 'Delete' hamburguesas.id %}">Borrar</a> 
+            <div id="columnas">
                 
-                </p> 
-            </li>
-
-    {% endfor %}
-    <a href="{% url 'New'  %}">Crear Hamburguesa</a> |  -->
-
-    <h1>Hamburguesas</h1>
-    
-        <h2>
-            <a style="color: red;" href="{% url 'List'  %}"> Ver Hamburguesas</a>
-        </h2>
-        
-
-
-
-
-
-<!-- iasjkajsoa -->
-
+            <center>
+                <h1 style="color: blueviolet;">NAYELY BALCAZAR</h1>
+                <h3>
+                    <li>Estudiante de 4to grado de secundaria</li>
+                    <li>15 años</li>
+                    <li>Peruana</li>
+                    <li>Estudiante de programación</li>
+                    <li>Amante de la tecnologia,matematicas y datos</li>
+                    <li>Divertida</li>
+                    <li>Encantada de siempre aprender algo nuevo</li>
+                </div>
+                </h3>
+            </center>
+           
+            <br>
+            </div>
+            <div align="center">
+              
+                <h1 style="color:blueviolet;">SOLE IBANEZ</h1>
+                <h3>
+                <li>Ingenieria Industrial</li>
+                <li> 31 años</li>
+                <li>Mamá de Vicente</li>
+                <li>Curiosa</li>
+                <li>Inquieta</li>
+                <li>En constante aprendizaje</li>
+                </h3>
+             
+                
+                   
+            </div>
+        </header>
 
 </head>
 <body>
     
-
 </body>
 </html>

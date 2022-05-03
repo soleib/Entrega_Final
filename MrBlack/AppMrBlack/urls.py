@@ -9,6 +9,7 @@ urlpatterns = [
     path('locales/',views.locales, name="Locales"),
     path('hamburguesas/',views.hamburguesas, name="Hamburguesas"),
     path('contacto/',views.formulariocontacto.as_view(), name="Contacto"),
+    path('nosotros/',views.nosotros,name="Nosotros"),
     path('HamburguesaFormulario/', views.hamburguesaFormulario, name="HamburguesaFormulario"),
     path('busquedaLocal/', views.busquedalocal, name="BusquedaLocal"),
     path('buscar/', views.buscar),
@@ -40,3 +41,5 @@ urlpatterns = [
     #inicio
     path('busquedaHamburguesa/', views.busquedaHamburguesa, name="BusquedaHamburguesa"),
     path('buscarHamburguesa/',views.buscarHamburguesa)]
+
+
