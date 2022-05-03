@@ -22,6 +22,7 @@ from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import PermissionRequiredMixin
 
 # Create your views here.
 def nosotros(request):
@@ -29,14 +30,22 @@ def nosotros(request):
 
 def inicio(request):
     if request.user.is_authenticated:
-        avatar= Avatar.objects.get(user=request.user.id)
-        return render(request, 'inicio.html',{'avatar':avatar})
+        if Avatar.objects.filter(user=request.user.id).exists():
+            avatar= Avatar.objects.get(user=request.user.id)
+            return render(request, 'inicio.html',{'avatar':avatar})                          
+        return render(request, 'inicio.html') 
     if not request.user.is_authenticated:
         return render(request, 'inicio.html')
 
 def hamburguesas(request):
-    avatar= Avatar.objects.get(user=request.user.id)
-    return render(request, 'hamburguesas.html',{'avatar':avatar})
+    if request.user.is_authenticated:
+        if Avatar.objects.filter(user=request.user.id).exists():
+            avatar= Avatar.objects.get(user=request.user.id)
+            return render(request, 'hamburguesas.html',{'avatar':avatar})                          
+        return render(request, 'hamburguesas.html') 
+    if not request.user.is_authenticated:
+        return render(request, 'hamburguesas.html')
+
 
 class formulariocontacto(View):
     def get (self,request,*args,**kwargs):
@@ -59,11 +68,25 @@ class formulariocontacto(View):
             return render(request,'contacto.html',contexto)
 
 def comentarios(request):
-    return render(request,'comentarios,html')   
+    if request.user.is_authenticated:
+        if Avatar.objects.filter(user=request.user.id).exists():
+            avatar= Avatar.objects.get(user=request.user.id)
+            return render(request, 'comentarios,html',{'avatar':avatar})                          
+        return render(request, 'comentarios,html') 
+    if not request.user.is_authenticated:
+        return render(request, 'comentarios,html')
+    
+ 
 
 def locales(request):
-    
-    return render(request, 'locales.html')
+    if request.user.is_authenticated:
+        if Avatar.objects.filter(user=request.user.id).exists():
+            avatar= Avatar.objects.get(user=request.user.id)
+            return render(request, 'locales.html',{'avatar':avatar})                          
+        return render(request, 'locales.html') 
+    if not request.user.is_authenticated:
+        return render(request, 'locales.html')
+   
 
 def agregalocal(request, nombrelocal, ciudad, provincia, direccion, altura, fechaapertura):
 
@@ -164,27 +187,30 @@ class HamburguesaDetalle(DetailView):
 
 
 
-class HamburguesaCreacion(CreateView):
+class HamburguesaCreacion(PermissionRequiredMixin, CreateView):
 
       model = Hamburguesas
       template_name="hamburguesas_form.html"
       success_url = "/AppMrBlack/hamburguesas/list"
       fields = ['nombrehamburguesa','tipopan','tipocarne','cantidadmedallones','aderezo','salsaMrBlack','fechacreacion']
+      permission_required='AppMrBlack.add_Hamburguesas'
 
 
-class HamburguesaUpdate(UpdateView):
+class HamburguesaUpdate(PermissionRequiredMixin, UpdateView):
 
       model = Hamburguesas
       template_name="hamburguesas_form.html"
       success_url = "/AppMrBlack/hamburguesas/list"
       fields  = ['nombrehamburguesa','tipopan','tipocarne','cantidadmedallones','aderezo','salsaMrBlack','fechacreacion']
+      permission_required='AppMrBlack.change_Hamburguesas'
 
-
-class HamburguesaoDelete(DeleteView):
+class HamburguesaoDelete(PermissionRequiredMixin, DeleteView):
 
       model = Hamburguesas
       template_name="hamburguesas_confirm_delete.html"
       success_url = "/AppMrBlack/hamburguesas/list"
+      permission_required='AppMrBlack.delete_Hamburguesas'
+      
 
 def login_request(request):
     if request.method =="POST":
@@ -265,10 +291,9 @@ class LocalList(ListView):
       
     model = Locales
     template_name = "local_list.html"
-   
 
-
-
+    
+  
 class LocalDetalle(DetailView):
 
      model = Locales
@@ -276,24 +301,23 @@ class LocalDetalle(DetailView):
 
 
 
-class LocalCreacion(CreateView):
+class LocalCreacion(PermissionRequiredMixin, CreateView):
 
     model = Locales
     template_name="local_form.html"
     success_url = "/AppMrBlack/local/list"
     fields = ['nombrelocal','ciudad','provincia','direccion','altura','fechaapertura']
+    permission_required='AppMrBlack.add_Locales'
 
-
-class LocalUpdate(UpdateView):
+class LocalUpdate(PermissionRequiredMixin, UpdateView):
     model = Locales
     template_name="local_form.html"
     success_url = "/AppMrBlack/local/list"
     fields  = ['nombrelocal','ciudad','provincia','direccion','altura','fechaapertura']
+    permission_required='AppMrBlack.change_Locales'
 
-
-class LocalDelete(DeleteView):
-
+class LocalDelete(PermissionRequiredMixin, DeleteView):
     model = Locales
     template_name="local_confirm_delete.html"
     success_url = "/AppMrBlack/local/list"
-
+    permission_required='AppMrBlack.delete_Locales'
