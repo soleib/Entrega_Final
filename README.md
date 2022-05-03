@@ -8,7 +8,7 @@
 - Plantilla
 - CRUD Hamburguesa
 - Agregación de imágenes
-- Agregación de imágenes
+- Creacion comentarios de las hamburguesas
 - Formulario de contacto
 - Diseño a las vistas
 - Creación modelo Avatar
