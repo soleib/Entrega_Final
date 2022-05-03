@@ -93,8 +93,8 @@
         <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script> -->
         <!-- Core theme JS-->
         <!-- <script src="js/scripts.js"></script> --> 
-
-        <h1>Que hamburguesa te gustaria ver?</h1>
+        <h1>{{mensaje}}</h1>
+        <h2>Que hamburguesa te gustaria ver?</h2>
         <p>Porfavor hacer la busqueda en letras mayusculas</p>
         
         <form action="/AppMrBlack/buscarHamburguesa/" method="GET">{% csrf_token %}
@@ -103,7 +103,7 @@
                  
             <input type="submit" value = "Buscar"> 
         
-        <h3>{{mensaje}}</h3>
+        
     </body>
 </html>
 

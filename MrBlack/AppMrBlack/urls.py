@@ -11,8 +11,8 @@ urlpatterns = [
     path('contacto/',views.formulariocontacto.as_view(), name="Contacto"),
     path('nosotros/',views.nosotros,name="Nosotros"),
     path('HamburguesaFormulario/', views.hamburguesaFormulario, name="HamburguesaFormulario"),
-    path('busquedaLocal/', views.busquedalocal, name="BusquedaLocal"),
-    path('buscar/', views.buscar),
+    #path('busquedaLocal/', views.busquedalocal, name="BusquedaLocal"),
+    #path('buscar/', views.buscar),
 
     #CRUD
     path('leerhamburguesas/',views.leerHamburguesas,name="leerhamburguesas"),

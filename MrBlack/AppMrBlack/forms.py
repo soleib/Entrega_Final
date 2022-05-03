@@ -42,11 +42,11 @@ class UserEditForm(UserCreationForm):
     email = forms.EmailField()
     password1 = forms.CharField(label='Introduzca la contraseña',widget=forms.PasswordInput)
     password2 = forms.CharField(label='Repita la contraseña',widget=forms.PasswordInput)
+    imagen = forms.ImageField()
 
     class Meta:
         model = User
-        fields = ['nombre','descripcion','web','email','password1','password2']
-        #fields = ['descripcion','web','email','password1','password2']
+        fields = ['nombre','descripcion','web','email','password1','password2','imagen']
         help_texts= {k:"" for k in fields}
 
 class ContactoForm(forms.ModelForm):

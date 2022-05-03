@@ -22,7 +22,8 @@ from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.mixins import PermissionRequiredMixin
+from django.contrib.auth.mixins import PermissionRequiredMixin, LoginRequiredMixin
+
 
 # Create your views here.
 def nosotros(request):
@@ -48,7 +49,7 @@ def hamburguesas(request):
         return render(request, 'hamburguesas.html')
 
 
-class formulariocontacto(View):
+class formulariocontacto(LoginRequiredMixin,View):
  
 
 
@@ -73,7 +74,7 @@ class formulariocontacto(View):
 
 
               
-
+@login_required
 def comentarios(request):
     if request.user.is_authenticated:
         if Avatar.objects.filter(user=request.user.id).exists():
@@ -116,17 +117,17 @@ def hamburguesaFormulario(request):
         miFormulario = HamburguesaFormulario()
         return render(request, 'HamburguesaFormulario.html', {'miFormulario':miFormulario})
 
-def busquedalocal(request):
-    return render(request, "busquedaLocal.html")
+# def busquedalocal(request):
+#     return render(request, "busquedaLocal.html")
 
-def buscar(request):
-    if request.GET["nombrelocal"]:
-        nombrelocal = request.GET["nombrelocal"]
-        locales = Locales.objects.filter(nombrelocal = nombrelocal)
+# def buscar(request):
+#     if request.GET["nombrelocal"]:
+#         nombrelocal = request.GET["nombrelocal"]
+#         locales = Locales.objects.filter(nombrelocal = nombrelocal)
 
-        return render(request, "resultadoBusqueda.html", {"locales":locales,"nombrelocal" : nombrelocal })
-    else:
-        return HttpResponse("No enviaste Datos")
+#         return render(request, "resultadoBusqueda.html", {"locales":locales,"nombrelocal" : nombrelocal })
+#     else:
+#         return HttpResponse("No enviaste Datos")
 
 
 def leerHamburguesas(request):
@@ -231,7 +232,9 @@ def login_request(request):
 
             if user is not None:
                 login(request,user)
-                
+                if Avatar.objects.filter(user=request.user.id).exists():
+                    avatar = Avatar.objects.get(user=request.user.id)                
+                    return render(request, 'inicio.html', {"mensaje":f"Bienvenidx {usuario}", 'avatar':avatar} )
                 return render(request, 'inicio.html', {"mensaje":f"Bienvenidx {usuario}"} )
             else:
                 return render(request, 'inicio.html', {"mensaje":"Error, los datos ingresados son incorrectos"} )
@@ -260,9 +263,10 @@ def busquedaHamburguesa(request):
 def buscarHamburguesa(request):
     if request.GET["nombrehamburguesa"]:
         nombrehamburguesa = request.GET["nombrehamburguesa"]
-        hamburguesa = Hamburguesas.objects.filter(nombrehamburguesa =nombrehamburguesa)
-
-        return render(request, "buscarHamburguesa.html", {"hamburguesa":hamburguesa,"nombrehamburguesa" : nombrehamburguesa})
+        if Hamburguesas.objects.filter(nombrehamburguesa =nombrehamburguesa).exists():
+            hamburguesa = Hamburguesas.objects.filter(nombrehamburguesa =nombrehamburguesa)
+            return render(request, "buscarHamburguesa.html", {"hamburguesa":hamburguesa,"nombrehamburguesa" : nombrehamburguesa})
+        return HttpResponse("Los datos son incorrectos")
     else:
         return HttpResponse("No enviaste Datos")    
 
@@ -284,6 +288,7 @@ def editarPerfil(request):
             usuario.email = informacion['email']
             usuario.password1 = informacion['password1']
             usuario.password2 = informacion['password2']
+            usuario.imagen = informacion['imagen']
 
             return render(request,"inicio.html") 
         #En caso de que no sea post
