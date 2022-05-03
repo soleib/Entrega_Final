@@ -1,4 +1,15 @@
-# Entrega1-Ibanez
-Primera Entrega Trabajo Final
+# Entrega-Proyecto Final Python
 
-Es una blog para una Marca que tiene locales que venden Panchos o Hamburguesas. 
+INTEGRANTES
+
+-> NAYELI BALCAZAR:
+
+
+-> SOLEDAD IBAÑEZ: 
+- Creación modelos Locales y Hamburguesas
+- CRUD Locales
+- Inicio de Sesión, Registro y Logout
+- Realización de los casos de prueba
+- Video para la entrega final
+- Limitar accesos con Loguin
+- Limitar accesos con Permisos de usuarios.
