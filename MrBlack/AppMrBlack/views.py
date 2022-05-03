@@ -26,8 +26,9 @@ from django.contrib.auth.mixins import PermissionRequiredMixin
 
 # Create your views here.
 def nosotros(request):
-    return render(request,"nosotros.html")
-
+    
+        return render(request, 'nosotros.html')
+    
 def inicio(request):
     if request.user.is_authenticated:
         if Avatar.objects.filter(user=request.user.id).exists():
@@ -48,6 +49,9 @@ def hamburguesas(request):
 
 
 class formulariocontacto(View):
+ 
+
+
     def get (self,request,*args,**kwargs):
         form=ContactoForm()
         contexto={
@@ -60,12 +64,15 @@ class formulariocontacto(View):
         form = ContactoForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect('Inicio')
+            return render(request,'contactoRespuesta.html')
         else:
             contexto = {
                 'form':form,
             }
             return render(request,'contacto.html',contexto)
+
+
+              
 
 def comentarios(request):
     if request.user.is_authenticated:
