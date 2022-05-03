@@ -27,8 +27,14 @@ from django.contrib.auth.mixins import PermissionRequiredMixin, LoginRequiredMix
 
 # Create your views here.
 def nosotros(request):
-    
+    if request.user.is_authenticated:
+        if Avatar.objects.filter(user=request.user.id).exists():
+            avatar= Avatar.objects.get(user=request.user.id)
+            return render(request, 'nosotros.html',{'avatar':avatar})                          
+        return render(request, 'nosotros.html') 
+    if not request.user.is_authenticated:
         return render(request, 'nosotros.html')
+       # return render(request, 'nosotros.html')
     
 def inicio(request):
     if request.user.is_authenticated:

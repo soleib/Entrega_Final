@@ -8,6 +8,8 @@ from django import forms
 from django.contrib.auth.models import User
 from.models import Contacto
 
+
+
 from .models import Contacto
 
 class HamburguesaFormulario(forms.Form):
@@ -49,7 +51,7 @@ class UserEditForm(UserCreationForm):
         fields = ['nombre','descripcion','web','email','password1','password2','imagen']
         help_texts= {k:"" for k in fields}
 
-class ContactoForm(forms.ModelForm):
+class ContactoForm(forms.ModelForm): 
     class Meta:
         model = Contacto 
         fields = '__all__'
