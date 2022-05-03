@@ -3,15 +3,15 @@
 **INTEGRANTES**
 
 -> NAYELI BALCAZAR:
-->Creación de formulario de contacto
-->CRUD Hamburguesa
-->Vista sobre nosotros y inicio
-->Formulario de búsqueda
-->Plantilla
-->Creación de comentarios
-->Agregación de imágenes 
-->Diseño a las vistas
-->Creación modelo Avatar
+-Vista sobre nosotros y inicio
+-Formulario de búsqueda
+-Plantilla
+-CRUD Hamburguesa
+-Agregación de imágenes
+-Agregación de imágenes
+-Formulario de contacto
+-Diseño a las vistas
+-Creación modelo Avatar
 
 -> SOLEDAD IBAÑEZ: 
 - Creación modelos Locales y Hamburguesas
