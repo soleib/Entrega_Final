@@ -3,7 +3,7 @@
 
 **INTEGRANTES**
 
--> NAYELI BALCAZAR:
+-> NAYELY BALCAZAR:
 - Vista sobre nosotros y inicio
 - Formulario de búsqueda
 - Plantilla
